@@ -35,7 +35,7 @@ class TestKochCurve < Test::Unit::TestCase
     lc_p1 = Segment::Location.new(0, 0)
     lc_p2 = Segment::Location.new(1.0 / 2.0, 1.0 / 2.0 * (3.0**(1.0 / 2.0)))
     segment = Segment.new(p1: lc_p1, p2: lc_p2)
-    assert_equal Math::PI * 1.0 / 3.0, segment.radian
+    assert_equal (Math::PI * 1.0 / 3.0).round(3), segment.radian
     assert_equal 1, segment.length
   end
 
