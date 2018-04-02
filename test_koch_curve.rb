@@ -65,7 +65,24 @@ class TestKochCurve < Test::Unit::TestCase
     end
   end
 
+  def test_next_step_returns_array_with_4_segments
+    seg = @segment
+    next_segs = seg.next_step
+    assert_equal Array, next_segs.class
+    assert_equal 4, next_segs.size
+    next_segs.each do |a_seg|
+      assert_equal Segment, a_seg.class
+    end
+  end
+
+  def test_triangle_returns_array_with_2_segments
+    tri = @segment.triangle
+    assert_equal Array, tri
+    assert_equal 2, tri.size
+    tri.each do |seg|
+      assert_equal Segment, seg.class
+    end
+  end
 end
 
 #ToDO
-#- Segment生成でp1, p2が与えられたら radian, lengthを計算する。

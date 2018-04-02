@@ -34,6 +34,12 @@ class Segment
     [seg_0, seg_1, seg_2]
   end
 
+  def next_step
+  end
+  
+  def triangle
+  end
+
   private
 
   def calc_p2
