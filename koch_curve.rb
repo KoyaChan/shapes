@@ -28,16 +28,23 @@ class Segment
     loc_1 = Location.new(p1.x + x_y_len[:x], p1.y + x_y_len[:y])
     loc_2 = Location.new(loc_1.x + x_y_len[:x], loc_1.y + x_y_len[:y])
     loc_3 = p2
-    seg_0 = Segment.new(p1:loc_0, p2:loc_1)
-    seg_1 = Segment.new(p1:loc_1, p2:loc_2)
-    seg_2 = Segment.new(p1:loc_2, p2:loc_3)
+    seg_0 = Segment.new(p1: loc_0, p2: loc_1)
+    seg_1 = Segment.new(p1: loc_1, p2: loc_2)
+    seg_2 = Segment.new(p1: loc_2, p2: loc_3)
     [seg_0, seg_1, seg_2]
   end
 
   def next_step
   end
-  
+
   def triangle
+    left_seg = Segment.new(p1: p1,
+                           radian: radian + (1.0 / 3.0 * Math::PI).round(3),
+                           length: length)
+    right_seg = Segment.new(p1: left_seg.p2,
+                            radian: radian - (1.0 / 3.0 * Math::PI).round(3),
+                            length: length)
+    [left_seg, right_seg]
   end
 
   private
@@ -52,19 +59,15 @@ class Segment
   def x_y_one_third_len(loc1, loc2)
     x_len = ((loc2.x - loc1.x) / 3).round(3)
     y_len = ((loc2.y - loc1.y) / 3).round(3)
-    { x:x_len, y:y_len }
+    { x: x_len, y: y_len }
   end
-  
+
   def calc_radian
     y_len = p2.y - p1.y
-    Math::asin(y_len / length).round(3)
+    Math.asin(y_len / length).round(3)
   end
-  
+
   def calc_length
     (((p2.x - p1.x)**2 + (p2.y - p1.y)**2.0)**(1.0 / 2.0)).round(3)
   end
 end
-
-
-
-

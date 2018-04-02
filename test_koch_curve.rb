@@ -77,7 +77,7 @@ class TestKochCurve < Test::Unit::TestCase
 
   def test_triangle_returns_array_with_2_segments
     tri = @segment.triangle
-    assert_equal Array, tri
+    assert_equal Array, tri.class
     assert_equal 2, tri.size
     tri.each do |seg|
       assert_equal Segment, seg.class
