@@ -32,8 +32,19 @@ class TestKochCurve < Test::Unit::TestCase
   end
 
   def test_get_radian_from_segment_made_from_p1_p2
+    lc_p1 = Segment::Location.new(0, 0)
+    lc_p2 = Segment::Location.new(1.0 / 2.0, 1.0 / 2.0 * (3.0**(1.0 / 2.0)))
+    segment = Segment.new(p1: lc_p1, p2: lc_p2)
+    assert_equal Math::PI * 1.0 / 3.0, segment.radian
+    assert_equal 1, segment.length
   end
 
+  def test_get_length_from_segment_made_from_p1_p2
+    lc_p1 = Segment::Location.new(1, 1)
+    lc_p2 = Segment::Location.new(2, 1 + 2 * (1.0 / 2.0 * (3.0**(1.0 / 2.0))))
+    segment = Segment.new(p1: lc_p1, p2: lc_p2)
+    assert_equal 2, segment.length
+  end
 
   def test_segment_is_divided_to_3_parts
     assert_equal 3, @segment.divide.size
