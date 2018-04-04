@@ -11,7 +11,7 @@ class TestKochCurve < Test::Unit::TestCase
 
   def test_next_step_returns_array_with_4_segments
     seg = @segment
-    koch = KochCurve.new(seg)
+    koch = KochCurve.new(p1: @location, radian: Math::PI * 1.0 / 3.0, length: 100.0 / 3.0)
     next_segs = koch.next_step
     assert_equal Array, next_segs.class
     assert_equal 4, next_segs.size

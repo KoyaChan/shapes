@@ -70,15 +70,20 @@ class Segment
 end
 
 class KochCurve
-  attr_reader :segments
-  def initialize(segment)
-    @segments = Array.new(segment)
+  attr_reader :segments, :base_seg, :count
+  def initialize(p1: nil, p2: nil, radian: 0, length: 1)
+    @base_seg = make_segment(p1, p2, radian, length)
+    @segments = []
   end
 
   def next_step
+    divided = base_seg.divide
+    [divided[0], divided[1].triangle, divided[2]].flatten
   end
 
-  def make_segment(p1: location_1, p2: location_2, radian: radian, length: length)
-  end
+  private
 
+  def make_segment(p1, p2, radian, length)
+    Segment.new(p1: p1, p2: p2, radian: radian, length: length)
+  end
 end
