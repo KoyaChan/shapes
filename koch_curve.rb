@@ -71,8 +71,9 @@ end
 
 class KochCurve
   attr_reader :segments, :base_seg, :count
-  def initialize(p1: nil, p2: nil, radian: 0, length: 1)
-    @base_seg = make_segment(p1, p2, radian, length)
+  def initialize(base: nil, count: 0)
+    @base_seg = base
+    @count = count
     @segments = []
   end
 
