@@ -34,9 +34,6 @@ class Segment
     [seg_0, seg_1, seg_2]
   end
 
-  def next_step
-  end
-
   def triangle
     left_seg = Segment.new(p1: p1,
                            radian: radian + (1.0 / 3.0 * Math::PI).round(3),
@@ -70,4 +67,18 @@ class Segment
   def calc_length
     (((p2.x - p1.x)**2 + (p2.y - p1.y)**2.0)**(1.0 / 2.0)).round(3)
   end
+end
+
+class KochCurve
+  attr_reader :segments
+  def initialize(segment)
+    @segments = Array.new(segment)
+  end
+
+  def next_step
+  end
+
+  def make_segment(p1: location_1, p2: location_2, radian: radian, length: length)
+  end
+
 end
