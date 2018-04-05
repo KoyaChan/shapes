@@ -28,17 +28,17 @@ class Segment
     loc_1 = Location.new(p1.x + x_y_len[:x], p1.y + x_y_len[:y])
     loc_2 = Location.new(loc_1.x + x_y_len[:x], loc_1.y + x_y_len[:y])
     loc_3 = p2
-    seg_0 = Segment.new(p1: loc_0, p2: loc_1)
-    seg_1 = Segment.new(p1: loc_1, p2: loc_2)
-    seg_2 = Segment.new(p1: loc_2, p2: loc_3)
+    seg_0 = self.class.new(p1: loc_0, p2: loc_1)
+    seg_1 = self.class.new(p1: loc_1, p2: loc_2)
+    seg_2 = self.class.new(p1: loc_2, p2: loc_3)
     [seg_0, seg_1, seg_2]
   end
 
   def triangle
-    left_seg = Segment.new(p1: p1,
+    left_seg = self.class.new(p1: p1,
                            radian: radian + (1.0 / 3.0 * Math::PI).round(3),
                            length: length)
-    right_seg = Segment.new(p1: left_seg.p2,
+    right_seg = self.class.new(p1: left_seg.p2,
                             radian: radian - (1.0 / 3.0 * Math::PI).round(3),
                             length: length)
     [left_seg, right_seg]
@@ -85,6 +85,6 @@ class KochCurve
   private
 
   def make_segment(p1, p2, radian, length)
-    Segment.new(p1: p1, p2: p2, radian: radian, length: length)
+    base_seg.class.new(p1: p1, p2: p2, radian: radian, length: length)
   end
 end
