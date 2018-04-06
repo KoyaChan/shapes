@@ -75,4 +75,22 @@ class TestSegment < Test::Unit::TestCase
   end
 end
 
+class TestLocation
+  def test_location_is_made_from_x_y_values
+    loc = Location.new(x: 0, y: 1)
+    assert_equal Location, loc.class
+  end
+
+  def test_location_is_made_from_radian_length_values
+    loc = Location.new(radian: 1.0 / 3.0 * Math::PI, length: 1)
+    assert_equal Location, loc.class
+  end
+
+  def test_location_distance_method
+    loc = Location.new(x: 0, y: 0)
+    loc1 = Location.new(x: 1, y: 2)
+    assert_equal 5**(1.0 / 2.0), loc.distance(log1)
+  end
+end
+
 #ToDO

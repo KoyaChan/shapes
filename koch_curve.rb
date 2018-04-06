@@ -1,3 +1,14 @@
+class Location
+  attr_reader :x, :y, :radian, :length
+  def initialize(x: nil, y: nil, radian: nil, length: nil)
+    @x, @y = x, y if x && y
+    @radian, @length = radian, length if radian && length
+  end
+
+  def distance(other)
+    ((x - other.x)**2 + (y - other.y)**2)**(1.0 / 2.0)
+  end
+end
 
 class Segment
   attr_reader :p1
