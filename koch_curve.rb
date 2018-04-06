@@ -1,5 +1,5 @@
 class Location
-  attr_reader :x, :y, :radian, :length
+  attr_accessor :x, :y, :radian, :length
   def initialize(x: nil, y: nil, radian: nil, length: nil)
     @x, @y = x, y if x && y
     @radian, @length = radian, length if radian && length
@@ -13,7 +13,10 @@ end
 class Segment
   attr_reader :p1
 
-  Location = Struct.new(:x, :y)
+  def self.make_location(x, y)
+    Location.new(x: x, y: y)
+  end
+
   def initialize(p1:0, p2:nil, radian:nil, length:nil)
     @p1 = p1
     @p2 = p2
@@ -36,8 +39,8 @@ class Segment
   def divide
     x_y_len = x_y_one_third_len(p1, p2)
     loc_0 = p1
-    loc_1 = Location.new(p1.x + x_y_len[:x], p1.y + x_y_len[:y])
-    loc_2 = Location.new(loc_1.x + x_y_len[:x], loc_1.y + x_y_len[:y])
+    loc_1 = Segment.make_location(p1.x + x_y_len[:x], p1.y + x_y_len[:y])
+    loc_2 = Segment.make_location(loc_1.x + x_y_len[:x], loc_1.y + x_y_len[:y])
     loc_3 = p2
     seg_0 = self.class.new(p1: loc_0, p2: loc_1)
     seg_1 = self.class.new(p1: loc_1, p2: loc_2)
@@ -58,7 +61,7 @@ class Segment
   private
 
   def calc_p2
-    location = Location.new(x: 0, y: 0)
+    location = Segment.make_location(0, 0)
     location.x = (p1.x + Math.cos(radian) * length).round(3)
     location.y = (p1.y + Math.sin(radian) * length).round(3)
     location
