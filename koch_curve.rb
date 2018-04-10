@@ -95,9 +95,10 @@ class Segment
   end
 
   def one_third_len(loc1, loc2)
-    x_len = ((loc2.x - loc1.x) / 3).round(3)
-    y_len = ((loc2.y - loc1.y) / 3).round(3)
-    { x: x_len, y: y_len }
+    {
+      x: ((loc2.x - loc1.x) / 3).round(3),
+      y: ((loc2.y - loc1.y) / 3).round(3)
+    }
   end
 
   def displace(p, diff)
