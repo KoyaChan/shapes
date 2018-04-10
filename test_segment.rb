@@ -73,6 +73,20 @@ class TestSegment < Test::Unit::TestCase
       assert_equal Segment, seg.class
     end
   end
+
+  def test_triangle_makes_Pizza_radian
+    tri = @segment.triangle
+    tri.each do |seg|
+      assert_equal @segment.length, seg.length
+    end
+    assert_equal @segment.radian + Segment::Pizza_radian, tri[0].radian
+    assert_equal @segment.radian - Segment::Pizza_radian, tri[1].radian
+  end
+
+  def test_rotate
+    diff = (1.0 / 2.0) * Math::PI
+    assert_equal @segment.radian + diff, (@segment.clone.rotate(diff)).radian
+  end
 end
 
 class TestLocation
