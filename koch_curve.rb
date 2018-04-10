@@ -17,7 +17,7 @@ class Segment
     Location.new(x: x, y: y)
   end
 
-  def initialize(p1:0, p2:nil, radian:nil, length:nil)
+  def initialize(p1: 0, p2: nil, radian: nil, length: nil)
     @p1 = p1
     @p2 = p2
     @radian = radian
@@ -38,14 +38,14 @@ class Segment
 
   def divide
     x_y_len = x_y_one_third_len(p1, p2)
-    loc_0 = p1
-    loc_1 = Segment.make_location(p1.x + x_y_len[:x], p1.y + x_y_len[:y])
-    loc_2 = Segment.make_location(loc_1.x + x_y_len[:x], loc_1.y + x_y_len[:y])
-    loc_3 = p2
-    seg_0 = self.class.new(p1: loc_0, p2: loc_1)
-    seg_1 = self.class.new(p1: loc_1, p2: loc_2)
-    seg_2 = self.class.new(p1: loc_2, p2: loc_3)
-    [seg_0, seg_1, seg_2]
+    loc0 = p1
+    loc1 = Segment.make_location(p1.x + x_y_len[:x], p1.y + x_y_len[:y])
+    loc2 = Segment.make_location(loc1.x + x_y_len[:x], loc1.y + x_y_len[:y])
+    loc3 = p2
+    seg0 = self.class.new(p1: loc0, p2: loc1)
+    seg1 = self.class.new(p1: loc1, p2: loc2)
+    seg2 = self.class.new(p1: loc2, p2: loc3)
+    [seg0, seg1, seg2]
   end
 
   def triangle
