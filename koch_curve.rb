@@ -65,10 +65,11 @@ class Segment
   private
 
   def calc_p2
-    location = Segment.make_location(0, 0)
-    location.x = (p1.x + Math.cos(radian) * length).round(3)
-    location.y = (p1.y + Math.sin(radian) * length).round(3)
-    location
+    diff = {
+      x: (Math.cos(radian) * length).round(3),
+      y: (Math.sin(radian) * length).round(3)
+    }
+    Segment.make_location(*displace(p1, diff))
   end
 
   def one_third_len(loc1, loc2)
@@ -78,7 +79,7 @@ class Segment
   end
 
   def displace(p, diff)
-    [p.x + diff[:x], p.y + diff[:y]]
+    [(p.x + diff[:x]).round(3), (p.y + diff[:y]).round(3)]
   end
 
   def locations_to_divide(p1, p2)
