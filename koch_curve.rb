@@ -13,7 +13,7 @@ end
 class Segment
   attr_reader :p1
 
-  Pizza_radian = (1.0 / 3.0) * Math::PI
+  Pizza_radian = ((1.0 / 3.0) * Math::PI).round(3)
 
   def self.make_location(x, y)
     Location.new(x: x, y: y)
@@ -47,13 +47,13 @@ class Segment
   end
 
   def triangle
-    left_seg = clone.rotate(Pizza_radian.round(3))
+    left_seg = clone.rotate(Pizza_radian)
 
     right_seg = self.class.new(
       p1: left_seg.p2,
       radian: radian,
       length: length
-    ).rotate(-Pizza_radian.round(3))
+    ).rotate(-Pizza_radian)
 
     [left_seg, right_seg]
   end
