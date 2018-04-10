@@ -77,10 +77,14 @@ class Segment
     { x: x_len, y: y_len }
   end
 
+  def displace(p, diff)
+    [p.x + diff[:x], p.y + diff[:y]]
+  end
+
   def locations_to_divide(p1, p2)
     diff = one_third_len(p1, p2)
-    mid1 = Segment.make_location(p1.x + diff[:x], p1.y + diff[:y])
-    mid2 = Segment.make_location(mid1.x + diff[:x], mid1.y + diff[:y])
+    mid1 = Segment.make_location(*displace(p1, diff))
+    mid2 = Segment.make_location(*displace(mid1, diff))
     [
       p1,
       mid1,
