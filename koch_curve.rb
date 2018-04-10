@@ -47,19 +47,20 @@ class Segment
   end
 
   def triangle
-    left_seg = self.class.new(
-      p1: p1,
-      radian: radian + Pizza_radian.round(3),
-      length: length
-    )
+    left_seg = clone.rotate(Pizza_radian.round(3))
 
     right_seg = self.class.new(
       p1: left_seg.p2,
-      radian: radian - Pizza_radian.round(3),
+      radian: radian,
       length: length
-    )
+    ).rotate(-Pizza_radian.round(3))
 
     [left_seg, right_seg]
+  end
+
+  def rotate(radian)
+    @radian += radian
+    self
   end
 
   private
