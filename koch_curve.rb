@@ -81,7 +81,7 @@ class Segment
   end
 
   def calc_length
-    (((p2.x - p1.x)**2 + (p2.y - p1.y)**2.0)**(1.0 / 2.0)).round(3)
+    p1.distance(p2)
   end
 end
 
