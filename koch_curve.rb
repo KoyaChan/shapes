@@ -1,8 +1,8 @@
 class Location
   attr_accessor :x, :y, :radian, :length
-  def initialize(x: nil, y: nil, radian: nil, length: nil)
-    @x, @y = x, y if x && y
-    @radian, @length = radian, length if radian && length
+  def initialize(x: nil, y: nil)
+    @x = x
+    @y = y
   end
 
   def distance(other)
