@@ -66,11 +66,14 @@ class Segment
   private
 
   def calc_p2
-    diff = {
+    Segment.make_location(*displace(p1, polar_to_cartesian))
+  end
+
+  def polar_to_cartesian
+    {
       x: (Math.cos(radian) * length).round(3),
       y: (Math.sin(radian) * length).round(3)
     }
-    Segment.make_location(*displace(p1, diff))
   end
 
   def calc_radian
