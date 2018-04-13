@@ -19,8 +19,8 @@ class Segment
     Location.new(x: x, y: y)
   end
 
-  def initialize(p1: 0, p2: nil, radian: nil, length: nil)
-    @p1 = p1
+  def initialize(p1: nil, p2: nil, radian: nil, length: nil)
+    @p1 = p1 || Segment.make_location(0, 0)
     @p2 = p2
     @radian = radian
     @length = length
