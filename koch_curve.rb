@@ -6,7 +6,9 @@ class Location
   end
 
   def distance(other)
-    (((x - other.x)**2 + (y - other.y)**2)**(1.0 / 2.0)).round(3)
+    square = ->(num) { num**2 }
+    square_each = diff(other).map(&square)
+    (sum(square_each)**(1.0 / 2.0)).round(3)
   end
 
   def to_a
@@ -15,6 +17,12 @@ class Location
 
   def diff(other)
     [x - other.x, y - other.y]
+  end
+
+  private
+
+  def sum(ary)
+    ary.inject(0) { |e, sum| sum + e }
   end
 end
 
