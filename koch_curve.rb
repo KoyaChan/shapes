@@ -6,7 +6,7 @@ class Location
   end
 
   def distance(other)
-    ((x - other.x)**2 + (y - other.y)**2)**(1.0 / 2.0)
+    (((x - other.x)**2 + (y - other.y)**2)**(1.0 / 2.0)).round(3)
   end
 end
 
