@@ -89,21 +89,29 @@ class TestSegment < Test::Unit::TestCase
   end
 end
 
-class TestLocation
+class TestLocation < Test::Unit::TestCase
   def test_location_is_made_from_x_y_values
-    loc = Segment.make_location(x: 0, y: 1)
-    assert_equal Location, loc.class
-  end
-
-  def test_location_is_made_from_radian_length_values
-    loc = Segment.make_location(radian: 1.0 / 3.0 * Math::PI, length: 1)
+    loc = Location.new(x: 0, y: 1)
     assert_equal Location, loc.class
   end
 
   def test_location_distance_method
-    loc = Segment.make_location(x: 0, y: 0)
-    loc1 = Segment.make_location(x: 1, y: 2)
-    assert_equal 5**(1.0 / 2.0), loc.distance(log1)
+    loc = Location.new(x: 0, y: 0)
+    loc1 = Location.new(x: 1, y: 2)
+    assert_equal (5**(1.0 / 2.0)).round(3), loc.distance(loc1)
+  end
+
+  def test_to_a
+    loc = Location.new(x: 3, y: 5)
+    ary = loc.to_a
+    assert_equal Array, ary.class
+    assert_equal [3, 5], ary
+  end
+
+  def test_diff_makes_new_array_with_diff_of_each
+    loc1 = Location.new(x: 10, y:4)
+    loc2 = Location.new(x: 8, y: 3)
+    assert_equal [2, 1], loc1.diff(loc2)
   end
 end
 
