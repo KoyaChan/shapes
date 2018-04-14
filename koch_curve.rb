@@ -13,6 +13,9 @@ class Location
     [x, y]
   end
 
+  def diff(other)
+    [x - other.x, y - other.y]
+  end
 end
 
 class Segment
