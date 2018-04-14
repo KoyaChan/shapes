@@ -15,6 +15,10 @@ class Location
     [x, y]
   end
 
+  def to_h
+    {x: x, y: y}
+  end
+
   def diff(other)
     [x - other.x, y - other.y]
   end
