@@ -113,6 +113,17 @@ class TestLocation < Test::Unit::TestCase
     loc2 = Location.new(x: 8, y: 3)
     assert_equal [2, 1], loc1.diff(loc2)
   end
+
+  def test_locations_to_divide
+    loc1 = Location.new(x: 1, y: 2)
+    loc2 = Location.new(x: 7, y: 11)
+    locations = loc1.locations_to_divide(loc2, 3)
+    assert_equal Array, locations.class
+    assert_equal 3, locations.size
+    div1 = Location.new(x: 3, y: 5)
+    div2 = Location.new(x: 5, y: 8)
+    assert_equal [div1, div2], locations
+  end
 end
 
 #ToDO
