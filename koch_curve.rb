@@ -8,6 +8,11 @@ class Location
   def distance(other)
     (((x - other.x)**2 + (y - other.y)**2)**(1.0 / 2.0)).round(3)
   end
+
+  def to_a
+    [x, y]
+  end
+
 end
 
 class Segment
