@@ -74,7 +74,8 @@ class Segment
   end
 
   def divide
-    loc0, loc1, loc2, loc3 = locations_to_divide(p1, p2)
+    loc0, loc3 = [p1, p2]
+    loc1, loc2 = p1.locations_to_divide(p2, num: 3)
     seg0 = self.class.new(p1: loc0, p2: loc1)
     seg1 = self.class.new(p1: loc1, p2: loc2)
     seg2 = self.class.new(p1: loc2, p2: loc3)
@@ -118,25 +119,6 @@ class Segment
 
   def calc_length
     p1.distance(p2)
-  end
-
-  def locations_to_divide(p1, p2)
-    diff = one_third_len(p1, p2)
-    mid1 = Segment.make_location(*displace(p1, diff))
-    mid2 = Segment.make_location(*displace(mid1, diff))
-    [
-      p1,
-      mid1,
-      mid2,
-      p2
-    ]
-  end
-
-  def one_third_len(loc1, loc2)
-    {
-      x: ((loc2.x - loc1.x) / 3).round(3),
-      y: ((loc2.y - loc1.y) / 3).round(3)
-    }
   end
 
   def displace(p, diff)
