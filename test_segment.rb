@@ -118,12 +118,13 @@ class TestLocation < Test::Unit::TestCase
   def test_locations_to_divide
     loc1 = Location.new(x: 1, y: 2)
     loc2 = Location.new(x: 7, y: 11)
-    locations = loc1.locations_to_divide(loc2, 3)
+    locations = loc1.locations_to_divide(loc2, num: 3)
     assert_equal Array, locations.class
-    assert_equal 3, locations.size
+    assert_equal 2, locations.size
     div1 = Location.new(x: 3, y: 5)
     div2 = Location.new(x: 5, y: 8)
-    assert_equal [div1, div2], locations
+    assert div1.equal(locations[0])
+    assert div2.equal(locations[1])
   end
 
   def test_divide_axis_by_factor

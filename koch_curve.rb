@@ -11,6 +11,14 @@ class Location
     (sum(square_each)**(1.0 / 2.0)).round(3)
   end
 
+  def locations_to_divide(other, num: 3)
+    divide_x = divide_axis_by(num, other, :x)
+    divide_y = divide_axis_by(num, other, :y)
+    divide_x.zip(divide_y).map do |x, y| 
+      self.class.new({ x: x, y: y })
+    end
+  end
+
   def to_a
     [x, y]
   end
@@ -30,6 +38,10 @@ class Location
     end
   end
 
+  def equal(other)
+    diff(other) == { x: 0, y: 0 }
+  end
+    
   private
 
   def sum(ary)
