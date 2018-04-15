@@ -6,7 +6,7 @@ class Location
   end
 
   def distance(other)
-    square = ->(num) { num**2 }
+    square = ->(ary) { ary[1]**2 }
     square_each = diff(other).map(&square)
     (sum(square_each)**(1.0 / 2.0)).round(3)
   end
