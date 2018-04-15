@@ -14,8 +14,8 @@ class Location
   def locations_to_divide(other, num: 3)
     divide_x = divide_axis_by(num, other, :x)
     divide_y = divide_axis_by(num, other, :y)
-    divide_x.zip(divide_y).map do |x, y| 
-      self.class.new({ x: x, y: y })
+    divide_x.zip(divide_y).map do |x, y|
+      self.class.new(x: x, y: y)
     end
   end
 
@@ -37,7 +37,7 @@ class Location
   def equal(other)
     diff(other) == { x: 0, y: 0 }
   end
-    
+
   private
 
   def sum(ary)
@@ -74,8 +74,9 @@ class Segment
   end
 
   def divide
-    loc0, loc3 = [p1, p2]
+    loc0 = p1
     loc1, loc2 = p1.locations_to_divide(p2, num: 3)
+    loc3 = p2
     seg0 = self.class.new(p1: loc0, p2: loc1)
     seg1 = self.class.new(p1: loc1, p2: loc2)
     seg2 = self.class.new(p1: loc2, p2: loc3)
