@@ -20,13 +20,13 @@ class Location
   end
 
   def diff(other)
-    { x: x - other.x, y: y - other.y }
+    { x: other.x - x, y: other.y - y }
   end
 
   def divide_axis_by(num, other, axis)
     length = diff(other)[axis] / num
     (1...num).inject([]) do |ary, n|
-      ary << diff(other)[axis] + length * n
+      ary << to_h[axis] + length * n
     end
   end
 
