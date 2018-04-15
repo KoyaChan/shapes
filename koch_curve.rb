@@ -20,7 +20,7 @@ class Location
   end
 
   def diff(other)
-    [x: x - other.x, y: y - other.y]
+    {x: x - other.x, y: y - other.y}
   end
 
   private

@@ -111,7 +111,8 @@ class TestLocation < Test::Unit::TestCase
   def test_diff_makes_new_hash_with_diff_of_each
     loc1 = Location.new(x: 10, y:4)
     loc2 = Location.new(x: 8, y: 3)
-    assert_equal [x: 2, y: 1], loc1.diff(loc2)
+    h = {x: 2, y: 1}
+    assert_equal h, loc1.diff(loc2)
   end
 
   def test_locations_to_divide
