@@ -19,10 +19,6 @@ class Location
     end
   end
 
-  def to_a
-    [x, y]
-  end
-
   def to_h
     { x: x, y: y }
   end

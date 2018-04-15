@@ -101,13 +101,6 @@ class TestLocation < Test::Unit::TestCase
     assert_equal (5**(1.0 / 2.0)).round(3), loc.distance(loc1)
   end
 
-  def test_to_a
-    loc = Location.new(x: 3, y: 5)
-    ary = loc.to_a
-    assert_equal Array, ary.class
-    assert_equal [3, 5], ary
-  end
-
   def test_diff_makes_new_hash_with_diff_of_each
     loc1 = Location.new(x: 10, y:4)
     loc2 = Location.new(x: 8, y: 3)
