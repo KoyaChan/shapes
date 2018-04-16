@@ -66,6 +66,7 @@ class Segment
   end
 
   def radian
+    @radian = Math::PI * 2 + @radian if @radian < 0
     @radian ||= calc_radian
   end
 
@@ -95,12 +96,13 @@ class Segment
     [left_seg, right_seg]
   end
 
-  def rotate(radian)
-    @radian += radian
-    self
+  def rotate(diff_radian)
+    self.class.new(p1: p1, p2: nil, radian: self.radian + diff_radian, length: length)
   end
 
   private
+
+  attr_writer :radian
 
   def calc_p2
     Segment.make_location(*displace(p1, polar_to_cartesian))
@@ -115,7 +117,9 @@ class Segment
 
   def calc_radian
     y_len = p2.y - p1.y
-    Math.asin(y_len / length).round(3)
+    radian = Math.asin(y_len / length).round(3)
+    radian += Math::PI * 2 if radian < 0
+    radian
   end
 
   def calc_length
@@ -128,6 +132,8 @@ class Segment
 end
 
 class KochCurve
+  Pizza_radian = ((1.0 / 3.0) * Math::PI).round(3)
+
   attr_reader :segments, :base_seg, :count
   def initialize(base: nil, count: 0)
     @base_seg = base
@@ -137,12 +143,16 @@ class KochCurve
 
   def next_step
     divided = base_seg.divide
-    [divided[0], divided[1].triangle, divided[2]].flatten
+    [divided[0], triangle(divided[1]), divided[2]].flatten
+  end
+
+  def triangle(segment)
+    #ToDo
   end
 
   private
 
   def make_segment(p1, p2, radian, length)
-    base_seg.class.new(p1: p1, p2: p2, radian: radian, length: length)
+    Segment.new(p1: p1, p2: p2, radian: radian, length: length)
   end
 end
