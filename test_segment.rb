@@ -39,6 +39,18 @@ class TestSegment < Test::Unit::TestCase
     assert_equal 1, segment.length
   end
 
+  def test_radian_is_always_positive
+    @segment.radian -= Math::PI
+    assert_equal (Math::PI * 4.0 / 3.0).round(3), @segment.radian
+  end 
+
+  def test_p2_changes_when_radian_is_changed
+    @segment.radian += (Math::PI * 2.0 / 3.0).round(3)
+    lc_p2 =  Segment.make_location( (-100.0 / 3.0).round(3), 0)
+    assert_equal lc_p2.x, @segment.p2.x
+    assert_equal lc_p2.y, @segment.p2.y
+  end
+
   def test_get_length_from_segment_made_from_p1_p2
     lc_p1 = Segment.make_location(1, 1)
     lc_p2 = Segment.make_location(2, 1 + 2 * (1.0 / 2.0 * (3.0**(1.0 / 2.0))))
