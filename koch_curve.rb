@@ -102,8 +102,6 @@ class Segment
 
   private
 
-  attr_writer :radian
-
   def calc_p2
     Segment.make_location(*displace(p1, polar_to_cartesian))
   end
