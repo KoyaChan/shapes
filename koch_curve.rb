@@ -66,12 +66,14 @@ class Segment
   end
 
   def radian
-    @radian ||= calc_radian
+    return @radian unless @radian.nil?
+    self.radian = calc_radian
   end
 
   def radian=(rad)
     @radian = (rad >= 0 ? rad : (Math::PI * 2 + rad).round(3))
     @p2 = calc_p2
+    @radian
   end
 
   def length
@@ -115,9 +117,7 @@ class Segment
 
   def calc_radian
     y_len = p2.y - p1.y
-    radian = Math.asin(y_len / length).round(3)
-    radian += Math::PI * 2 if radian < 0
-    radian
+    Math.asin(y_len / length).round(3)
   end
 
   def calc_length
