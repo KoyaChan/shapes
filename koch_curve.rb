@@ -79,15 +79,16 @@ class Segment
   end
 
   def divide(num = 3)
-    divide_locs = [p1]
-    divide_locs << p1.locations_to_divide(p2, num: num)
-    divide_locs << p2
-    divide_locs.flatten!
-
-    divided_segments = divide_locs.map.with_index do |loc, i|
-      i < num ? self.class.new(p1: loc, p2: divide_locs[i + 1]) : nil
+    divide_locs = p1.locations_to_divide(p2, num: num)
+    divide_locs.unshift(p1)
+    divide_locs.push(p2)
+    (0...num).inject([]) do |divided_segments, i|
+      divided_segments <<
+        self.class.new(
+          p1: divide_locs[i],
+          p2: divide_locs[i + 1]
+        )
     end
-    divided_segments.compact!
   end
 
   def triangle
