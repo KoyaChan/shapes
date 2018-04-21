@@ -45,8 +45,8 @@ class TestSegment < Test::Unit::TestCase
   end 
 
   def test_p2_changes_when_radian_is_changed
-    @segment.radian += (Math::PI * 2.0 / 3.0).round(3)
-    lc_p2 =  Segment.make_location( (-100.0 / 3.0).round(3), 0)
+    @segment.radian += Math::PI * 2.0 / 3.0
+    lc_p2 =  Segment.make_location(0, 0)
     assert_equal lc_p2.x, @segment.p2.x
     assert_equal lc_p2.y, @segment.p2.y
   end
