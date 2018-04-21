@@ -97,7 +97,7 @@ class TestSegment < Test::Unit::TestCase
 
   def test_rotate
     diff = (1.0 / 2.0) * Math::PI
-    assert_equal @segment.radian + diff, (@segment.clone.rotate(diff)).radian
+    assert_equal @segment.radian + diff, @segment.rotate(diff).radian
   end
 end
 

@@ -101,7 +101,8 @@ class Segment
   end
 
   def rotate(diff_radian)
-    self.class.new(p1: p1, p2: nil, radian: self.radian + diff_radian, length: length)
+    self.radian += diff_radian
+    self
   end
 
   private
