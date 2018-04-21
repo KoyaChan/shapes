@@ -92,18 +92,6 @@ class Segment
     end
   end
 
-  def triangle
-    left_seg = clone.rotate(Pizza_radian)
-
-    right_seg = self.class.new(
-      p1: left_seg.p2,
-      radian: radian,
-      length: length
-    ).rotate(-Pizza_radian)
-
-    [left_seg, right_seg]
-  end
-
   def rotate(diff_radian)
     self.radian += diff_radian
     self

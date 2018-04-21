@@ -77,24 +77,6 @@ class TestSegment < Test::Unit::TestCase
     end
   end
 
-  def test_triangle_returns_array_with_2_segments
-    tri = @segment.triangle
-    assert_equal Array, tri.class
-    assert_equal 2, tri.size
-    tri.each do |seg|
-      assert_equal Segment, seg.class
-    end
-  end
-
-  def test_triangle_makes_Pizza_radian
-    tri = @segment.triangle
-    tri.each do |seg|
-      assert_equal @segment.length, seg.length
-    end
-    assert_equal @segment.radian + Segment::Pizza_radian, tri[0].radian
-    assert_equal @segment.radian - Segment::Pizza_radian, tri[1].radian
-  end
-
   def test_rotate
     diff = (1.0 / 2.0) * Math::PI
     assert_equal @segment.radian + diff, @segment.rotate(diff).radian
@@ -143,4 +125,3 @@ class TestLocation < Test::Unit::TestCase
 end
 
 # ToDO
-# Location#divide_axis_byの to_h は axisの :x を @x に対応付けられないか
