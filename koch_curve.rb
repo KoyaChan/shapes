@@ -1,3 +1,4 @@
+
 class Location
   attr_accessor :x, :y
   def initialize(x: nil, y: nil)
@@ -48,8 +49,6 @@ end
 class Segment
   attr_reader :p1
 
-  Pizza_radian = ((1.0 / 3.0) * Math::PI).round(3)
-
   def self.make_location(x, y)
     Location.new(x: x, y: y)
   end
@@ -57,8 +56,10 @@ class Segment
   def initialize(p1: nil, p2: nil, radian: nil, length: nil)
     @p1 = p1 || Segment.make_location(0, 0)
     @p2 = p2
-    @radian = radian
-    @length = length
+    if @p2.nil?
+      @length = length
+      self.radian = radian
+    end
   end
 
   def p2
@@ -138,9 +139,11 @@ class Segment
 end
 
 class KochCurve
-  Pizza_radian = ((1.0 / 3.0) * Math::PI).round(3)
 
   attr_reader :segments, :base_seg, :count
+
+  Pizza_radian = Math::PI * 1.0 / 3.0
+
   def initialize(base: nil, count: 0)
     @base_seg = base
     @count = count
@@ -153,7 +156,14 @@ class KochCurve
   end
 
   def triangle(segment)
-    #ToDo
+    left_seg = segment.rotate(Pizza_radian)
+    right_seg = 
+      Segment.new(
+        p1: left_seg.p2,
+        radian: left_seg.radian - Pizza_radian * 2,
+        length: left_seg.length
+      )
+    [left_seg, right_seg]
   end
 
   private

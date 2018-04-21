@@ -17,8 +17,8 @@ class TestKochCurve < Test::Unit::TestCase
     triangle = koch.triangle(segment)
     assert_equal 2, triangle.size
     assert_equal Segment, triangle[0].class
-    assert_equal Segment::Pizza_radian, triangle[0].radian
-    assert_equal (Segment::Pizza_radian * 5).round(3), triangle[1].radian
+    assert_equal KochCurve::Pizza_radian, triangle[0].radian
+    assert_equal (KochCurve::Pizza_radian * 5).round(3), triangle[1].radian
   end
 
 
