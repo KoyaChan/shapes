@@ -144,10 +144,11 @@ class KochCurve
   def triangle(segment)
     left_seg = segment.rotate(Pizza_radian)
     right_seg =
-      Segment.new(
-        p1: left_seg.p2,
-        radian: left_seg.radian - Pizza_radian * 2,
-        length: left_seg.length
+      make_segment(
+        left_seg.p2,
+        nil,
+        left_seg.radian - Pizza_radian * 2,
+        left_seg.length
       )
     [left_seg, right_seg]
   end
