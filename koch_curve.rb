@@ -1,4 +1,3 @@
-
 class Location
   attr_accessor :x, :y
   def initialize(x: nil, y: nil)
@@ -56,10 +55,10 @@ class Segment
   def initialize(p1: nil, p2: nil, radian: nil, length: nil)
     @p1 = p1 || Segment.make_location(0, 0)
     @p2 = p2
-    if @p2.nil?
-      @length = length
-      self.radian = radian
-    end
+    return unless @p2.nil?
+
+    @length = length
+    self.radian = radian
   end
 
   def p2
@@ -127,7 +126,6 @@ class Segment
 end
 
 class KochCurve
-
   attr_reader :segments, :base_seg, :count
 
   Pizza_radian = Math::PI * 1.0 / 3.0
@@ -145,7 +143,7 @@ class KochCurve
 
   def triangle(segment)
     left_seg = segment.rotate(Pizza_radian)
-    right_seg = 
+    right_seg =
       Segment.new(
         p1: left_seg.p2,
         radian: left_seg.radian - Pizza_radian * 2,
