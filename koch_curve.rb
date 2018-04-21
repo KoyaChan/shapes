@@ -109,6 +109,10 @@ class Segment
     }
   end
 
+  def displace(p, diff)
+    [(p.x + diff[:x]).round(3), (p.y + diff[:y]).round(3)]
+  end
+
   def calc_radian
     y_len = p2.y - p1.y
     radian = Math.asin(y_len / length).round(3)
@@ -118,10 +122,6 @@ class Segment
 
   def calc_length
     p1.distance(p2)
-  end
-
-  def displace(p, diff)
-    [(p.x + diff[:x]).round(3), (p.y + diff[:y]).round(3)]
   end
 end
 
