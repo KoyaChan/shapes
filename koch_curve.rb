@@ -1,8 +1,8 @@
 class Location
   attr_accessor :x, :y
   def initialize(x: nil, y: nil)
-    @x = x
-    @y = y
+    @x = x.round(3)
+    @y = y.round(3)
   end
 
   def distance(other)
@@ -28,7 +28,7 @@ class Location
   end
 
   def divide_axis_by(num, other, axis)
-    length = diff(other)[axis] / num
+    length = (diff(other)[axis] / num).round(3)
     (1...num).inject([]) do |ary, n|
       ary << to_h[axis] + length * n
     end

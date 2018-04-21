@@ -10,7 +10,7 @@ class TestSegment < Test::Unit::TestCase
   end
 
   def test_location_has_x_and_y
-    assert_equal 100.0 / 3.0, @location.x
+    assert_equal (100.0 / 3.0).round(3), @location.x
     assert_equal 0, @location.y
   end
 
@@ -142,4 +142,5 @@ class TestLocation < Test::Unit::TestCase
   end
 end
 
-#ToDO
+# ToDO
+# Location#divide_axis_byの to_h は axisの :x を @x に対応付けられないか
