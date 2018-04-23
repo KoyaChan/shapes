@@ -63,7 +63,7 @@ class Segment
   end
 
   def p2
-    @p2 ||= calc_p2
+    @p2 ||= calc_p2_from_radian_length
   end
 
   def radian
@@ -73,7 +73,7 @@ class Segment
 
   def radian=(rad)
     @radian = (rad >= 0 ? rad : (Math::PI * 2 + rad).round(3))
-    @p2 = calc_p2
+    @p2 = calc_p2_from_radian_length
     @radian
   end
 
@@ -105,7 +105,7 @@ class Segment
     self.class.make_location(0, 0)
   end
 
-  def calc_p2
+  def calc_p2_from_radian_length
     self.class.make_location(*displace(p1, polar_to_cartesian))
   end
 
