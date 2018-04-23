@@ -8,7 +8,7 @@ class Location
   def distance(other)
     square = ->(ary) { ary[1]**2 }
     square_each = x_y_pair_of_diff_to(other).map(&square)
-    (sum(square_each)**(1.0 / 2.0)).round(3)
+    square_root(sum(square_each))
   end
 
   def locations_to_divide(other, num: 3)
@@ -40,6 +40,10 @@ class Location
   end
 
   private
+
+  def square_root(value)
+    (value**(1.0 / 2.0)).round(3)
+  end
 
   def sum(ary)
     ary.inject(0) { |e, sum| sum + e }
