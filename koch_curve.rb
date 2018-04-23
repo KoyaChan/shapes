@@ -68,7 +68,7 @@ class Segment
 
   def radian
     return @radian unless @radian.nil?
-    self.radian = calc_radian
+    self.radian = calc_radian_from_x_y_and_length
   end
 
   def radian=(rad)
@@ -120,7 +120,7 @@ class Segment
     [(p.x + diff[:x]).round(3), (p.y + diff[:y]).round(3)]
   end
 
-  def calc_radian
+  def calc_radian_from_x_y_and_length
     y_len = p2.y - p1.y
     Math.asin(y_len / length).round(3)
   end
