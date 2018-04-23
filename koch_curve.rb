@@ -73,6 +73,7 @@ class Segment
   def radian
     return @radian unless @radian.nil?
     self.radian = calc_radian_from_x_y_and_length
+    @radian
   end
 
   def radian=(rad)
