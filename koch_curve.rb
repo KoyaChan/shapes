@@ -74,7 +74,6 @@ class Segment
   def radian=(rad)
     @radian = (rad >= 0 ? rad : (Math::PI * 2 + rad).round(3))
     @p2 = calc_p2_from_radian_length
-    @radian
   end
 
   def length
