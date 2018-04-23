@@ -111,7 +111,7 @@ class Segment
   end
 
   def calc_p2_from_radian_length
-    self.class.make_location(*displace(p1, polar_to_cartesian))
+    self.class.make_location(*move(p1, polar_to_cartesian))
   end
 
   def polar_to_cartesian
@@ -121,8 +121,8 @@ class Segment
     }
   end
 
-  def displace(p, diff)
-    [(p.x + diff[:x]), (p.y + diff[:y])]
+  def move(location, diff)
+    [(location.x + diff[:x]), (location.y + diff[:y])]
   end
 
   def calc_radian_from_x_y_and_length
