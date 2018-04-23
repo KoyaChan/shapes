@@ -54,7 +54,7 @@ class Segment
   end
 
   def initialize(p1: nil, p2: nil, radian: 0, length: 1)
-    @p1 = p1 || Segment.make_location(0, 0)
+    @p1 = p1 || origin
     @p2 = p2
     return unless @p2.nil?
 
@@ -101,8 +101,12 @@ class Segment
 
   private
 
+  def origin
+    self.class.make_location(0, 0)
+  end
+
   def calc_p2
-    Segment.make_location(*displace(p1, polar_to_cartesian))
+    self.class.make_location(*displace(p1, polar_to_cartesian))
   end
 
   def polar_to_cartesian
