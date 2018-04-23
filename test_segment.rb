@@ -99,7 +99,7 @@ class TestLocation < Test::Unit::TestCase
     loc1 = Location.new(x: 10, y:4)
     loc2 = Location.new(x: 8, y: 3)
     h = {x: -2, y: -1}
-    assert_equal h, loc1.diff(loc2)
+    assert_equal h, loc1.x_y_pair_of_diff_to(loc2)
   end
 
   def test_locations_to_divide

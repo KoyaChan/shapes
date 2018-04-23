@@ -7,14 +7,15 @@ class Location
 
   def distance(other)
     square = ->(ary) { ary[1]**2 }
-    square_each = diff(other).map(&square)
+    square_each = x_y_pair_of_diff_to(other).map(&square)
     (sum(square_each)**(1.0 / 2.0)).round(3)
   end
 
   def locations_to_divide(other, num: 3)
     divide_x = divide_axis_by(num, other, :x)
     divide_y = divide_axis_by(num, other, :y)
-    divide_x.zip(divide_y).map do |x, y|
+    x_y_pairs_of_divide_locations = divide_x.zip(divide_y)
+    x_y_pairs_of_divide_locations.map do |x, y|
       self.class.new(x: x, y: y)
     end
   end
@@ -23,19 +24,19 @@ class Location
     { x: x, y: y }
   end
 
-  def diff(other)
+  def x_y_pair_of_diff_to(other)
     { x: other.x - x, y: other.y - y }
   end
 
   def divide_axis_by(num, other, axis)
-    length = (diff(other)[axis] / num).round(3)
+    length = (x_y_pair_of_diff_to(other)[axis] / num).round(3)
     (1...num).inject([]) do |ary, n|
       ary << to_h[axis] + length * n
     end
   end
 
   def equal(other)
-    diff(other) == { x: 0, y: 0 }
+    x_y_pair_of_diff_to(other) == { x: 0, y: 0 }
   end
 
   private
