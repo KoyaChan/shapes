@@ -10,7 +10,7 @@ class TestSegment < Test::Unit::TestCase
   end
 
   def test_location_has_x_and_y
-    assert_equal (100.0 / 3.0).round(3), @location.x
+    assert_equal (100.0 / 3.0).round(3), @location.x.round(3)
     assert_equal 0, @location.y
   end
 
@@ -27,21 +27,21 @@ class TestSegment < Test::Unit::TestCase
   def test_get_p2_from_segment
     lc_p2 = Segment.make_location(100.0 / 3.0 + 100.0 / (3.0 * 2),
                                   100.0 / 3.0 * 1.0 / 2.0 * (3.0**(1.0 / 2.0)))
-    assert_equal lc_p2.x.round(3), @segment.p2.x
-    assert_equal lc_p2.y.round(3), @segment.p2.y
+    assert_equal lc_p2.x.round(3), @segment.p2.x.round(3)
+    assert_equal lc_p2.y.round(3), @segment.p2.y.round(3)
   end
 
   def test_get_radian_from_segment_made_from_p1_p2
     lc_p1 = Segment.make_location(0, 0)
     lc_p2 = Segment.make_location(1.0 / 2.0, 1.0 / 2.0 * (3.0**(1.0 / 2.0)))
     segment = Segment.new(p1: lc_p1, p2: lc_p2)
-    assert_equal (Math::PI * 1.0 / 3.0).round(3), segment.radian
+    assert_equal (Math::PI * 1.0 / 3.0).round(3), segment.radian.round(3)
     assert_equal 1, segment.length
   end
 
   def test_radian_is_always_positive_1
     @segment.radian -= Math::PI
-    assert_equal (Math::PI * 4.0 / 3.0).round(3), @segment.radian
+    assert_equal (Math::PI * 4.0 / 3.0).round(3), @segment.radian.round(3)
   end 
 
   def test_radian_is_always_posivive_2
@@ -54,8 +54,8 @@ class TestSegment < Test::Unit::TestCase
   def test_p2_changes_when_radian_is_changed
     @segment.radian += Math::PI * 2.0 / 3.0
     lc_p2 =  Segment.make_location(0, 0)
-    assert_equal lc_p2.x, @segment.p2.x
-    assert_equal lc_p2.y, @segment.p2.y
+    assert_equal lc_p2.x, @segment.p2.x.round(3)
+    assert_equal lc_p2.y, @segment.p2.y.round(3)
   end
 
   def test_get_length_from_segment_made_from_p1_p2
@@ -86,7 +86,7 @@ class TestSegment < Test::Unit::TestCase
 
   def test_rotate
     diff = (1.0 / 2.0) * Math::PI
-    assert_equal @segment.radian + diff, @segment.rotate(diff).radian
+    assert_equal (@segment.radian + diff).round(3), @segment.rotate(diff).radian.round(3)
   end
 end
 
@@ -99,7 +99,7 @@ class TestLocation < Test::Unit::TestCase
   def test_location_distance_method
     loc = Location.new(x: 0, y: 0)
     loc1 = Location.new(x: 1, y: 2)
-    assert_equal (5**(1.0 / 2.0)).round(3), loc.distance(loc1)
+    assert_equal (5**(1.0 / 2.0)).round(3), loc.distance(loc1).round(3)
   end
 
   def test_diff_makes_new_hash_with_diff_of_each

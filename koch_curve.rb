@@ -1,8 +1,8 @@
 class Location
   attr_accessor :x, :y
   def initialize(x: nil, y: nil)
-    @x = x.round(3)
-    @y = y.round(3)
+    @x = x
+    @y = y
   end
 
   def distance(other)
@@ -29,7 +29,8 @@ class Location
   end
 
   def divide_axis_by(num, other, axis)
-    divided_length_on_axis = (x_y_pair_of_diff_to(other)[axis] / num).round(3)
+    divided_length_on_axis = x_y_pair_of_diff_to(other)[axis] / num
+
     (1...num).inject([]) do |ary_of_points_on_axis, n|
       ary_of_points_on_axis << to_h[axis] + divided_length_on_axis * n
     end
@@ -42,7 +43,7 @@ class Location
   private
 
   def square_root(value)
-    (value**(1.0 / 2.0)).round(3)
+    value**(1.0 / 2.0)
   end
 
   def sum(ary)
@@ -77,7 +78,7 @@ class Segment
   end
 
   def radian=(rad)
-    @radian = (rad >= 0 ? rad : (Math::PI * 2 + rad).round(3))
+    @radian = positive(rad)
     @p2 = calc_p2_from_radian_length
   end
 
@@ -115,22 +116,26 @@ class Segment
 
   def polar_to_cartesian
     {
-      x: (Math.cos(radian) * length).round(3),
-      y: (Math.sin(radian) * length).round(3)
+      x: (Math.cos(radian) * length),
+      y: (Math.sin(radian) * length)
     }
   end
 
   def displace(p, diff)
-    [(p.x + diff[:x]).round(3), (p.y + diff[:y]).round(3)]
+    [(p.x + diff[:x]), (p.y + diff[:y])]
   end
 
   def calc_radian_from_x_y_and_length
     y_len = p2.y - p1.y
-    Math.asin(y_len / length).round(3)
+    Math.asin(y_len / length)
   end
 
   def calc_length
     p1.distance(p2)
+  end
+
+  def positive(radian)
+    radian >= 0 ? radian : (radian + Math::PI * 2)
   end
 end
 
