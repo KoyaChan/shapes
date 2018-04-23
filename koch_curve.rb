@@ -29,9 +29,9 @@ class Location
   end
 
   def divide_axis_by(num, other, axis)
-    length = (x_y_pair_of_diff_to(other)[axis] / num).round(3)
+    divided_length_on_axis = (x_y_pair_of_diff_to(other)[axis] / num).round(3)
     (1...num).inject([]) do |ary_of_points_on_axis, n|
-      ary_of_points_on_axis << to_h[axis] + length * n
+      ary_of_points_on_axis << to_h[axis] + divided_length_on_axis * n
     end
   end
 
