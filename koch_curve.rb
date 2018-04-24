@@ -153,7 +153,7 @@ class KochCurve
   def make_koch_curve_segments(num: 0, seg: base_seg)
     divided = seg.divide
     next_segments = [divided[0], triangle(divided[1]), divided[2]].flatten!
-    return next_segments if num == 0
+    return next_segments if num.zero?
     all_segments = next_segments.map do |segment|
       make_koch_curve_segments(num: num - 1, seg: segment)
     end
