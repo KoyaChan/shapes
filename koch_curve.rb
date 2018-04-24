@@ -11,7 +11,7 @@ class Location
     square_root(sum(square_each))
   end
 
-  def locations_to_divide(other, num: 3)
+  def locations_to_divide(other, num: 3.0)
     divide_x = divide_axis_by(num, other, :x)
     divide_y = divide_axis_by(num, other, :y)
     x_y_pairs_of_divide_locations = divide_x.zip(divide_y)
@@ -29,7 +29,7 @@ class Location
   end
 
   def divide_axis_by(num, other, axis)
-    divided_length_on_axis = x_y_pair_of_diff_to(other)[axis] / num
+    divided_length_on_axis = x_y_pair_of_diff_to(other)[axis] / num.to_f
 
     (1...num).inject([]) do |ary_of_points_on_axis, n|
       ary_of_points_on_axis << to_h[axis] + divided_length_on_axis * n
