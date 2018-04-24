@@ -31,7 +31,10 @@ class TestKochCurve < Test::Unit::TestCase
       assert_equal Segment, a_seg.class
     end
   end
-end
 
-# Todo
-# - Segmentを負の方向へrotateしたあと、segment.radianの値を再計算させる
+  def test_next_step_returns_result_of_recursive_call
+    koch = KochCurve.new(base: @segment)
+    next_segs = koch.next_step(num: 1)
+    assert_equal 4 * 4, next_segs.size
+  end
+end
