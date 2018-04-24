@@ -154,7 +154,7 @@ class KochCurve
   end
 
   def make_and_print_points(num = @count)
-    segments = make_koch_curve_segments(num: num - 1)
+    segments = make_koch_curve_segments(num: num)
     segments.each(&method(:print_p1_of_segment))
     segments[-1].p2.print
   end
@@ -164,9 +164,10 @@ class KochCurve
   end
 
   def make_koch_curve_segments(num: 0, seg: base_seg)
+    return [seg] if num.zero?
     divided = seg.divide
     next_segments = [divided[0], triangle(divided[1]), divided[2]].flatten!
-    return next_segments if num.zero?
+    return next_segments if num == 1
     all_segments = next_segments.map do |segment|
       make_koch_curve_segments(num: num - 1, seg: segment)
     end

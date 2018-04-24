@@ -26,7 +26,7 @@ class TestKochCurve < Test::Unit::TestCase
     koch = KochCurve.new(base: @segment)
     next_segs = koch.make_koch_curve_segments
     assert_equal Array, next_segs.class
-    assert_equal 4, next_segs.size
+    assert_equal 1, next_segs.size
     next_segs.each do |a_seg|
       assert_equal Segment, a_seg.class
     end
@@ -35,6 +35,6 @@ class TestKochCurve < Test::Unit::TestCase
   def test_make_koch_curve_segments_returns_result_of_recursive_call
     koch = KochCurve.new(base: @segment)
     next_segs = koch.make_koch_curve_segments(num: 1)
-    assert_equal 4 * 4, next_segs.size
+    assert_equal 4, next_segs.size
   end
 end
