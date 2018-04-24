@@ -40,6 +40,10 @@ class Location
     x_y_pair_of_diff_to(other) == { x: 0, y: 0 }
   end
 
+  def print
+    puts "#{@x.round(8)} #{@y.round(8)}"
+  end
+
   private
 
   def square_root(value)
@@ -148,6 +152,16 @@ class KochCurve
     @base_seg = base
     @count = count
     @segments = []
+  end
+
+  def make_and_print_points(num: 5)
+    segments = make_koch_curve_segments(num: num)
+    segments.each(&method(:print_p1_of_segment))
+    segments[-1].p2.print
+  end
+
+  def print_p1_of_segment(segment)
+    segment.p1.print
   end
 
   def make_koch_curve_segments(num: 0, seg: base_seg)
