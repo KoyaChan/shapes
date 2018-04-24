@@ -153,8 +153,8 @@ class KochCurve
     @count = count
   end
 
-  def make_and_print_points
-    segments = make_koch_curve_segments(num: @count)
+  def make_and_print_points(num = @count)
+    segments = make_koch_curve_segments(num)
     segments.each(&method(:print_p1_of_segment))
     segments[-1].p2.print
   end
