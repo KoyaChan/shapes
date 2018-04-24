@@ -37,4 +37,16 @@ class TestKochCurve < Test::Unit::TestCase
     next_segs = koch.make_koch_curve_segments(num: 1)
     assert_equal 4, next_segs.size
   end
+
+  def test_make_koch_curve_segments_with_num_1
+    loc21 = Location.new(x: 38.88888889, y: 9.62250449)
+    loc25 = Location.new(x: 33.33333333, y: 19.24500897)
+    seg21 = Segment.new(p1: loc21, p2: loc25)
+    koch21 = KochCurve.new(base: seg21)
+    segments = koch21.make_koch_curve_segments(num: 1)
+    assert_equal 33.33333333, segments[2].p1.x
+    assert_equal 33.33333333, segments[1].p2.x
+    assert_equal 12.83000598, segments[2].p1.y
+    assert_equal 12.83000598, segments[1].p2.x
+  end
 end
