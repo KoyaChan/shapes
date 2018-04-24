@@ -88,6 +88,19 @@ class TestSegment < Test::Unit::TestCase
     diff = (1.0 / 2.0) * Math::PI
     assert_equal (@segment.radian + diff).round(3), @segment.rotate(diff).radian.round(3)
   end
+
+  def test_rotate_to_flat
+    diff = (1.0 / 3.0) * Math::PI
+    loc1 = Location.new(x: 5, y: 0)
+    loc2 = Location.new(x: 10, y: 0)
+    loc3 = Location.new(x: 0, y: 0)
+    seg = Segment.new(p1: loc1, p2: loc2)
+    seg.rotate(diff * 2)
+    seg.rotate(diff)
+    seg0 = Segment.new(p1: loc1, p2: loc3)
+    assert seg0.p1.equal(seg.p1)
+    assert seg0.p2.equal(seg.p2)
+  end
 end
 
 class TestLocation < Test::Unit::TestCase
