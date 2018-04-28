@@ -28,6 +28,15 @@ class Location
     { x: other.x - x, y: other.y - y }
   end
 
+  def move(diff)
+    x += diff[:x]
+    y += diff[:y]
+  end
+
+  def another(diff)
+    self.class.new(x: x + diff[:x], y: y + diff[:y])
+  end
+
   def divide_axis_by(num, other, axis)
     divided_length_on_axis = x_y_pair_of_diff_to(other)[axis] / num.to_f
 
@@ -37,7 +46,7 @@ class Location
   end
 
   def equal(other)
-    round_value = ->(k, v){v.round(8)}
+    round_value = ->(_, v) { v.round(8) }
     x_y_pair_of_diff_to(other).map(&round_value) == [0, 0]
   end
 
@@ -116,7 +125,7 @@ class Segment
   end
 
   def calc_p2_from_radian_length
-    self.class.make_location(*move(p1, polar_to_cartesian))
+    p1.another(polar_to_cartesian)
   end
 
   def polar_to_cartesian
@@ -126,16 +135,9 @@ class Segment
     }
   end
 
-  def move(location, diff)
-    [(location.x + diff[:x]), (location.y + diff[:y])]
-  end
-
   def calc_radian_from_x_y_and_length
-    x_len = p2.x - p1.x
-    y_len = p2.y - p1.y
-    rad = Math.asin(y_len / length)
-    return rad if x_len >= 0
-    Math::PI - rad
+    rad = Math.asin((p2.y - p1.y) / length)
+    p2.x >= p1.x ? rad : Math::PI - rad
   end
 
   def calc_length
