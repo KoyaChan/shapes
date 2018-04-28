@@ -27,11 +27,6 @@ class Location
     { x: other.x - x, y: other.y - y }
   end
 
-  def move(diff)
-    x += diff[:x]
-    y += diff[:y]
-  end
-
   def another(diff)
     self.class.new(x: x + diff[:x], y: y + diff[:y])
   end
