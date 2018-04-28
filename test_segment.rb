@@ -119,7 +119,7 @@ class TestLocation < Test::Unit::TestCase
     loc1 = Location.new(x: 10, y:4)
     loc2 = Location.new(x: 8, y: 3)
     h = {x: -2, y: -1}
-    assert_equal h, loc1.x_y_pair_of_diff_to(loc2)
+    assert_equal h, loc1.diff_to(loc2)
   end
 
   def test_locations_to_divide
@@ -132,15 +132,6 @@ class TestLocation < Test::Unit::TestCase
     div2 = Location.new(x: 5, y: 8)
     assert div1.equal(locations[0])
     assert div2.equal(locations[1])
-  end
-
-  def test_divide_axis_by_factor
-    loc1 = Location.new(x: 1, y: 2)
-    loc2 = Location.new(x: 7, y: 11)
-    divide_x = loc1.divide_axis_by(3, loc2, :x)
-    divide_y = loc1.divide_axis_by(3, loc2, :y)
-    assert_equal [3, 5], divide_x
-    assert_equal [5, 8], divide_y
   end
 end
 
