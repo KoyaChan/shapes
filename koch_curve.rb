@@ -37,7 +37,8 @@ class Location
   end
 
   def equal(other)
-    x_y_pair_of_diff_to(other) == { x: 0, y: 0 }
+    round_value = ->(k, v){v.round(8)}
+    x_y_pair_of_diff_to(other).map(&round_value) == [0, 0]
   end
 
   def print
