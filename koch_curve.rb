@@ -13,8 +13,10 @@ class Location
 
   def locations_to_divide(other, num: 3.0)
     diff = diff_to_divide(num, other)
-    locations = [another(diff)]
-    (2...num).inject(locations) { |locations, _| locations << locations[-1].another(diff) }
+    first_divider = [another(diff)]
+    (2...num).inject(first_divider) do |locations, _|
+      locations << locations[-1].another(diff)
+    end
   end
 
   def to_h
