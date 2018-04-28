@@ -135,7 +135,7 @@ class Segment
     y_len = p2.y - p1.y
     rad = Math.asin(y_len / length)
     return rad if x_len >= 0
-    return Math::PI - rad
+    Math::PI - rad
   end
 
   def calc_length
