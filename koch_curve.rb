@@ -12,7 +12,7 @@ class Location
   end
 
   def locations_to_divide(other, num: 3.0)
-    diff = diff_to_divide(num, other)
+    diff = diff_to_divide_by(num, other)
     first_divider = [another(diff)]
     (2...num).inject(first_divider) do |locations, _|
       locations << locations[-1].another(diff)
@@ -27,7 +27,7 @@ class Location
     self.class.new(x: x + diff[:x], y: y + diff[:y])
   end
 
-  def diff_to_divide(num, other)
+  def diff_to_divide_by(num, other)
     { x: (other.x - x) / num.to_f, y: (other.y - y) / num.to_f }
   end
 
