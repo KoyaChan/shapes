@@ -36,7 +36,7 @@ class TestSegment < Test::Unit::TestCase
     lc_p2 = Segment.make_location(1.0 / 2.0, 1.0 / 2.0 * (3.0**(1.0 / 2.0)))
     segment = Segment.new(p1: lc_p1, p2: lc_p2)
     assert_equal (Math::PI * 1.0 / 3.0).round(3), segment.radian.round(3)
-    assert_equal 1, segment.length
+    assert_equal 1, segment.length.round(8)
   end
 
   def test_radian_is_always_positive_1
@@ -62,7 +62,7 @@ class TestSegment < Test::Unit::TestCase
     lc_p1 = Segment.make_location(1, 1)
     lc_p2 = Segment.make_location(2, 1 + 2 * (1.0 / 2.0 * (3.0**(1.0 / 2.0))))
     segment = Segment.new(p1: lc_p1, p2: lc_p2)
-    assert_equal 2, segment.length
+    assert_equal 2, segment.length.round(8)
   end
 
   def test_segment_is_divided_to_3_parts
