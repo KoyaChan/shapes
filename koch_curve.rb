@@ -130,8 +130,11 @@ class Segment
   end
 
   def calc_radian_from_x_y_and_length
+    x_len = p2.x - p1.x
     y_len = p2.y - p1.y
-    Math.asin(y_len / length)
+    rad = Math.asin(y_len / length)
+    return rad if x_len >= 0
+    return Math::PI - rad
   end
 
   def calc_length
