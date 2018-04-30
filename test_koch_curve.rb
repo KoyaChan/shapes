@@ -1,5 +1,6 @@
 require 'test/unit'
 require './koch_curve'
+require './shapes'
 
 class TestKochCurve < Test::Unit::TestCase
   def setup

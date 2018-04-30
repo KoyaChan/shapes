@@ -1,5 +1,5 @@
 require 'test/unit'
-require './koch_curve'
+require './shapes'
 
 class TestSegment < Test::Unit::TestCase
   def setup
@@ -134,5 +134,3 @@ class TestLocation < Test::Unit::TestCase
     assert div2.equal(locations[1])
   end
 end
-
-# ToDO
