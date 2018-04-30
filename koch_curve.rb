@@ -1,3 +1,6 @@
+require './shapes'
+require 'cairo'
+
 class KochCurve
   attr_reader :segments, :base_seg, :count
 
@@ -16,6 +19,13 @@ class KochCurve
 
   def print_p1_of_segment(segment)
     segment.p1.print
+  end
+
+  def draw(context, num = @count)
+    segments = make_koch_curve_segments(num: num)
+    add_to_path = ->(segment) { segment.add_to_path(context) }
+    segments.each(&add_to_path)
+    context.stroke
   end
 
   def make_koch_curve_segments(num: 0, seg: base_seg)
@@ -47,3 +57,22 @@ class KochCurve
     Segment.new(p1: p1, p2: p2, radian: radian, length: length)
   end
 end
+
+width = 2000
+height = 1600
+format = Cairo::FORMAT_ARGB32
+stride = Cairo::Format.stride_for_width(format, width)
+data = '\0' * stride * height
+surface = Cairo::ImageSurface.new(data, format, width, height, stride)
+context = Cairo::Context.new(surface)
+context.set_source_color(Cairo::Color::SLATE_GRAY)
+context.rectangle(0, 0, width, height)
+context.fill
+
+context.set_source_color(Cairo::Color::HOT_MAGENTA)
+origin = Location.new(x: 0, y: 100)
+base = Segment.new(p1: origin, length: width)
+koch = KochCurve.new(base: base)
+count = 6
+koch.draw(context, count)
+surface.write_to_png("./curve#{count}.png")
