@@ -101,6 +101,16 @@ class TestSegment < Test::Unit::TestCase
     assert seg0.p1.equal(seg.p1)
     assert seg0.p2.equal(seg.p2)
   end
+
+  def test_add_to_path
+    surface = Cairo::ImageSurface.new(1000, 800)
+    context = Cairo::Context.new(surface)
+    p1 = Location.new(x: 0, y: 100)
+    seg = Segment.new(p1: p1, length: 500)
+    seg.add_to_path(context)
+    assert_equal [500, 100], context.current_point
+  end  
+
 end
 
 class TestLocation < Test::Unit::TestCase

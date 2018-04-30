@@ -104,6 +104,11 @@ class Segment
     self
   end
 
+  def add_to_path(context)
+    context.move_to(p1.x, p1.y)
+    context.line_to(p2.x, p2.y)
+  end
+
   private
 
   def origin
