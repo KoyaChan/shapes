@@ -1,5 +1,5 @@
 require 'test/unit'
-require './koch_curve'
+require './shapes'
 
 class TestSegment < Test::Unit::TestCase
   def setup
@@ -36,7 +36,7 @@ class TestSegment < Test::Unit::TestCase
     lc_p2 = Segment.make_location(1.0 / 2.0, 1.0 / 2.0 * (3.0**(1.0 / 2.0)))
     segment = Segment.new(p1: lc_p1, p2: lc_p2)
     assert_equal (Math::PI * 1.0 / 3.0).round(3), segment.radian.round(3)
-    assert_equal 1, segment.length
+    assert_equal 1, segment.length.round(8)
   end
 
   def test_radian_is_always_positive_1
@@ -62,7 +62,7 @@ class TestSegment < Test::Unit::TestCase
     lc_p1 = Segment.make_location(1, 1)
     lc_p2 = Segment.make_location(2, 1 + 2 * (1.0 / 2.0 * (3.0**(1.0 / 2.0))))
     segment = Segment.new(p1: lc_p1, p2: lc_p2)
-    assert_equal 2, segment.length
+    assert_equal 2, segment.length.round(8)
   end
 
   def test_segment_is_divided_to_3_parts
@@ -101,6 +101,16 @@ class TestSegment < Test::Unit::TestCase
     assert seg0.p1.equal(seg.p1)
     assert seg0.p2.equal(seg.p2)
   end
+
+  def test_add_to_path
+    surface = Cairo::ImageSurface.new(1000, 800)
+    context = Cairo::Context.new(surface)
+    p1 = Location.new(x: 0, y: 100)
+    seg = Segment.new(p1: p1, length: 500)
+    seg.add_to_path(context)
+    assert_equal [500, 100], context.current_point
+  end  
+
 end
 
 class TestLocation < Test::Unit::TestCase
@@ -119,7 +129,7 @@ class TestLocation < Test::Unit::TestCase
     loc1 = Location.new(x: 10, y:4)
     loc2 = Location.new(x: 8, y: 3)
     h = {x: -2, y: -1}
-    assert_equal h, loc1.x_y_pair_of_diff_to(loc2)
+    assert_equal h, loc1.diff_to(loc2)
   end
 
   def test_locations_to_divide
@@ -133,15 +143,4 @@ class TestLocation < Test::Unit::TestCase
     assert div1.equal(locations[0])
     assert div2.equal(locations[1])
   end
-
-  def test_divide_axis_by_factor
-    loc1 = Location.new(x: 1, y: 2)
-    loc2 = Location.new(x: 7, y: 11)
-    divide_x = loc1.divide_axis_by(3, loc2, :x)
-    divide_y = loc1.divide_axis_by(3, loc2, :y)
-    assert_equal [3, 5], divide_x
-    assert_equal [5, 8], divide_y
-  end
 end
-
-# ToDO

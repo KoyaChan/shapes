@@ -1,5 +1,6 @@
 require 'test/unit'
 require './koch_curve'
+require './shapes'
 
 class TestKochCurve < Test::Unit::TestCase
   def setup
@@ -47,6 +48,6 @@ class TestKochCurve < Test::Unit::TestCase
     assert_equal 33.33333333, segments[2].p1.x.round(8)
     assert_equal 33.33333333, segments[1].p2.x.round(8)
     assert_equal 12.83000598, segments[2].p1.y.round(8)
-    assert_equal 12.83000598, segments[1].p2.x.round(8)
+    assert_equal 12.83000598, segments[1].p2.y.round(8)
   end
 end
