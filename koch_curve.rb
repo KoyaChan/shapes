@@ -13,12 +13,9 @@ class KochCurve
 
   def make_and_print_points(num = @count)
     segments = make_koch_curve_segments(num: num)
-    segments.each(&method(:print_p1_of_segment))
+    print_p1_of_segment = ->(segment) { segment.p1.print }
+    segments.each(&print_p1_of_segment)
     segments[-1].p2.print
-  end
-
-  def print_p1_of_segment(segment)
-    segment.p1.print
   end
 
   def draw(context, num = @count)
