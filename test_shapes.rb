@@ -102,6 +102,19 @@ class TestSegment < Test::Unit::TestCase
     assert seg0.p2.equal(seg.p2)
   end
 
+  def test_invert
+    loc1 = Location.new(x: 5, y: 10)
+    loc2 = Location.new(x: 20, y: 40)
+    seg = Segment.new(p1: loc1, p2: loc2)
+    original = seg.dup
+    seg.invert
+    assert original.p1.equal(seg.p2)
+    assert original.p2.equal(seg.p1)
+    assert_equal original.radian + Math::PI, seg.radian
+    assert_equal original.length, seg.length
+  end
+
+
   def test_add_to_path
     surface = Cairo::ImageSurface.new(1000, 800)
     context = Cairo::Context.new(surface)
