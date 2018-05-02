@@ -1,5 +1,6 @@
 require 'test/unit'
 require './shapes'
+require 'cairo'
 
 class TestSegment < Test::Unit::TestCase
   def setup

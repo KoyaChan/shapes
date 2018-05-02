@@ -70,26 +70,11 @@ count = 6
 context.set_source_color(Cairo::Color::HOT_MAGENTA)
 origin = Location.new(x: 50, y: 100)
 base = Segment.new(p1: origin, length: width - 100)
-koch = KochCurve.new(base: base)
-koch.draw(context, count)
+draw_it = ->(base) { KochCurve.new(base: base).draw(context, count) }
 
-origin = base.p2
-p2 = Location.new(x: origin.x, y: height - 100)
-base1 = Segment.new(p1: origin, p2: p2)
-koch1 = KochCurve.new(base: base1)
-koch1.draw(context, count)
+draw_it.call(base)
 
-origin = base1.p2
-p2 = Location.new(x: 50, y: origin.y)
-base2 = Segment.new(p1: origin, p2: p2)
-koch2 = KochCurve.new(base: base2)
-koch2.draw(context, count)
-
-origin = base2.p2
-p2 = base.p1
-base3 = Segment.new(p1: origin, p2: p2)
-koch3 = KochCurve.new(base: base3)
-koch3.draw(context, count)
-
+base.rotate(Math::PI * 1.0 / 2.0)
+draw_it.call(base)
 
 surface.write_to_png("./curve#{count}.png")
