@@ -68,13 +68,16 @@ context.fill
 
 count = 6
 context.set_source_color(Cairo::Color::HOT_MAGENTA)
-origin = Location.new(x: 50, y: 100)
+origin = Location.new(x: 50, y: 50)
 base = Segment.new(p1: origin, length: width - 100)
 draw_it = ->(base) { KochCurve.new(base: base).draw(context, count) }
 
 draw_it.call(base)
 
-base.rotate(Math::PI * 1.0 / 2.0)
-draw_it.call(base)
+1.upto(3) do
+  base.invert
+  base.rotate(Math::PI * 1.0 / 2.0)
+  draw_it.call(base)
+end
 
 surface.write_to_png("./curve#{count}.png")
