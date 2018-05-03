@@ -43,7 +43,7 @@ class TestSegment < Test::Unit::TestCase
   def test_radian_is_always_positive_1
     @segment.radian -= Math::PI
     assert_equal (Math::PI * 4.0 / 3.0).round(3), @segment.radian.round(3)
-  end 
+  end
 
   def test_radian_is_always_posivive_2
     loc1 = Segment.make_location(0, 0)
@@ -54,7 +54,7 @@ class TestSegment < Test::Unit::TestCase
 
   def test_p2_changes_when_radian_is_changed
     @segment.radian += Math::PI * 2.0 / 3.0
-    lc_p2 =  Segment.make_location(0, 0)
+    lc_p2 = Segment.make_location(0, 0)
     assert_equal lc_p2.x, @segment.p2.x.round(3)
     assert_equal lc_p2.y, @segment.p2.y.round(3)
   end
@@ -78,7 +78,7 @@ class TestSegment < Test::Unit::TestCase
     p2 = Segment.make_location(99, 66)
     seg = Segment.new(p1: p1, p2: p2)
     seg.divide.each_with_index do |part, index|
-      assert_equal p1.x + index * 33 , part.p1.x
+      assert_equal p1.x + index * 33, part.p1.x
       assert_equal p1.y + index * 22, part.p1.y
       assert_equal p1.x + (index + 1) * 33, part.p2.x
       assert_equal p1.y + (index + 1) * 22, part.p2.y
@@ -87,7 +87,9 @@ class TestSegment < Test::Unit::TestCase
 
   def test_rotate
     diff = (1.0 / 2.0) * Math::PI
-    assert_equal (@segment.radian + diff).round(3), @segment.rotate(diff).radian.round(3)
+    new_radian = @segment.radian + diff
+    segment_after_rotate = @segment.rotate(diff)
+    assert_equal new_radian.round(3), segment_after_rotate.radian.round(3)
   end
 
   def test_rotate_to_flat
@@ -103,7 +105,7 @@ class TestSegment < Test::Unit::TestCase
     assert seg0.p2.equal(seg.p2)
   end
 
-  def test_invert
+  def test_invert_replaces_p1_and_p2
     loc1 = Location.new(x: 5, y: 10)
     loc2 = Location.new(x: 20, y: 40)
     seg = Segment.new(p1: loc1, p2: loc2)
@@ -115,16 +117,14 @@ class TestSegment < Test::Unit::TestCase
     assert_equal original.length, seg.length
   end
 
-
-  def test_add_to_path
+  def test_add_to_path_adds_segment_to_cairo_context_path
     surface = Cairo::ImageSurface.new(1000, 800)
     context = Cairo::Context.new(surface)
     p1 = Location.new(x: 0, y: 100)
     seg = Segment.new(p1: p1, length: 500)
     seg.add_to_path(context)
     assert_equal [500, 100], context.current_point
-  end  
-
+  end
 end
 
 class TestLocation < Test::Unit::TestCase
@@ -140,13 +140,13 @@ class TestLocation < Test::Unit::TestCase
   end
 
   def test_diff_makes_new_hash_with_diff_of_each
-    loc1 = Location.new(x: 10, y:4)
+    loc1 = Location.new(x: 10, y: 4)
     loc2 = Location.new(x: 8, y: 3)
-    h = {x: -2, y: -1}
+    h = { x: -2, y: -1 }
     assert_equal h, loc1.diff_to(loc2)
   end
 
-  def test_locations_to_divide
+  def test_locations_to_divide_makes_array_of_locations_to_devide_by_num
     loc1 = Location.new(x: 1, y: 2)
     loc2 = Location.new(x: 7, y: 11)
     locations = loc1.locations_to_divide(loc2, num: 3)
