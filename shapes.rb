@@ -146,3 +146,11 @@ class Segment
     radian >= 0 ? radian : (radian + Math::PI * 2)
   end
 end
+
+class Triangle
+  attr_reader :p1, :p2, :p3
+
+  def initialize(p1: nil, p2: nil, p3: nil)
+    p1, p2, p3 = [p1, p2, p3]
+  end
+end

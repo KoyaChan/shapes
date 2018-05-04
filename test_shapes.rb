@@ -158,3 +158,14 @@ class TestLocation < Test::Unit::TestCase
     assert div2.equal(locations[1])
   end
 end
+
+class TestTriangle < Test::Unit::TestCase
+  def test_triangle_is_made_with_3_locations
+    loc1 = Location.new(x: 10, y: 10)
+    loc2 = Location.new(x: 15, y: 15)
+    loc3 = Location.new(x: 20, y: 10)
+
+    tri = Triangle.new(p1: loc1, p2: loc2, p3: loc3)
+    assert_equal Triangle, tri.class
+  end
+end
