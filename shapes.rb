@@ -58,7 +58,7 @@ class Segment
     Location.new(x: x, y: y)
   end
 
-  def initialize(p1: nil, p2: nil, radian: 0, length: 1)
+  def initialize(p1: nil, p2: nil, radian: 0, length: 1000)
     @p1 = p1 || origin
     @p2 = p2
     return unless @p2.nil?
